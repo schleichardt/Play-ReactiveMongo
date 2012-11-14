@@ -35,7 +35,7 @@ class ReactiveMongoPlugin(app :Application) extends Plugin {
   def db: DefaultDB = helper.db
   def dbName: String = helper.dbName
   def connection: MongoConnection = helper.connection
-  def collection(name :String): Collection = helper.db(name)
+  def collection(name :String): DefaultCollection = helper.db(name)
 
   override def onStart {
     Logger info "ReactiveMongoPlugin starting..."
