@@ -2,7 +2,7 @@ import sbt._
 import sbt.Keys._
 
 object BuildSettings {
-  val buildVersion = "0.11.0-SNAPSHOT"
+  val buildVersion = "0.10.1-akka-2.3-SNAPSHOT"
 
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.reactivemongo",
@@ -119,9 +119,9 @@ object Play2ReactiveMongoBuild extends Build {
         "Typesafe repository snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
       ),
       libraryDependencies ++= Seq(
-        "org.reactivemongo" %% "reactivemongo" % "0.11.0-SNAPSHOT" cross CrossVersion.binary,
-        "com.typesafe.play" %% "play" % "2.2.2-RC1" % "provided" cross CrossVersion.binary,
-        "com.typesafe.play" %% "play-test" % "2.2.0" % "test" cross CrossVersion.binary,
+        "org.reactivemongo" %% "reactivemongo" % "0.10.0-akka-2.3-SNAPSHOT" cross CrossVersion.binary,
+        "com.typesafe.play" %% "play" % "2.2-akka-2.3-SNAPSHOT" % "provided" cross CrossVersion.binary,
+        "com.typesafe.play" %% "play-test" % "2.2-akka-2.3-SNAPSHOT" % "test" cross CrossVersion.binary,
         "org.specs2" % "specs2" % "1.13" % "test" cross CrossVersion.binary,
         "junit" % "junit" % "4.8" % "test" cross CrossVersion.Disabled,
         "org.apache.logging.log4j" % "log4j-to-slf4j" % "2.0-beta9"
