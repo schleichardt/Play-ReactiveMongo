@@ -3,6 +3,7 @@
 .cache
 *.class
 *.log
+.idea
 
 # sbt specific
 dist/*
