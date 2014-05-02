@@ -2,7 +2,7 @@ import sbt._
 import sbt.Keys._
 
 object BuildSettings {
-  val buildVersion = "0.10.1-akka-2.3-SNAPSHOT"
+  val buildVersion = "0.10.1-akka-2.3.0"
 
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.reactivemongo",
@@ -16,11 +16,7 @@ object BuildSettings {
 
 object Publish {
   def targetRepository: Project.Initialize[Option[sbt.Resolver]] = version { (version: String) =>
-    val nexus = "https://oss.sonatype.org/"
-    if (version.trim.endsWith("SNAPSHOT"))
-      Some("snapshots" at nexus + "content/repositories/snapshots")
-    else
-      Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    Some(Resolver.file("file", new File(Path.userHome.absolutePath + "/Projekte/schleichardt.github.io/jvmrepo"))(Resolver.mavenStylePatterns))
   }
   lazy val settings = Seq(
     publishMavenStyle := true,
@@ -116,12 +112,13 @@ object Play2ReactiveMongoBuild extends Build {
         "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/",
         "Sonatype" at "http://oss.sonatype.org/content/groups/public/",
         "Typesafe repository releases" at "http://repo.typesafe.com/typesafe/releases/",
-        "Typesafe repository snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
+        "Typesafe repository snapshots" at "http://repo.typesafe.com/typesafe/snapshots/",
+        "Schleichardts GitHub" at "http://schleichardt.github.io/jvmrepo/"
       ),
       libraryDependencies ++= Seq(
-        "org.reactivemongo" %% "reactivemongo" % "0.10.0-akka-2.3-SNAPSHOT" cross CrossVersion.binary,
-        "com.typesafe.play" %% "play" % "2.2-akka-2.3-SNAPSHOT" % "provided" cross CrossVersion.binary,
-        "com.typesafe.play" %% "play-test" % "2.2-akka-2.3-SNAPSHOT" % "test" cross CrossVersion.binary,
+        "org.reactivemongo" %% "reactivemongo" % "0.10.0-akka-2.3.0" cross CrossVersion.binary,
+        "com.typesafe.play" %% "play" % "2.2.2-akka-2.3.1" % "provided" cross CrossVersion.binary,
+        "com.typesafe.play" %% "play-test" % "2.2.2-akka-2.3.1" % "test" cross CrossVersion.binary,
         "org.specs2" % "specs2" % "1.13" % "test" cross CrossVersion.binary,
         "junit" % "junit" % "4.8" % "test" cross CrossVersion.Disabled,
         "org.apache.logging.log4j" % "log4j-to-slf4j" % "2.0-beta9"
